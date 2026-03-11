@@ -1,12 +1,13 @@
 import math
 from typing import Optional
+from functools import lru_cache
 
 LEARNING_RATE = 0.3
-DIFFICULTY_TOLERANCE = 0.15
 MIN_ABILITY = 0.0
 MAX_ABILITY = 1.0
 
 
+@lru_cache(maxsize=1024)
 def probability_correct(ability: float, difficulty: float) -> float:
     """
     1PL IRT (Rasch Model)
@@ -26,31 +27,33 @@ def update_ability(current_ability: float, difficulty: float, is_correct: bool) 
     expected = probability_correct(current_ability, difficulty)
     error = actual - expected
     new_ability = current_ability + LEARNING_RATE * error
-
-    # Clamp between 0.0 and 1.0
     return round(max(MIN_ABILITY, min(MAX_ABILITY, new_ability)), 4)
 
 
-def get_target_difficulty(ability: float) -> float:
-    """
-    Target difficulty should match current ability.
-    This is where IRT shines — question difficulty tracks θ.
-    """
-    return round(max(0.1, min(0.9, ability)), 2)
+def get_ability_label(ability: float) -> str:
+    if ability < 0.35:
+        return "Beginner"
+    elif ability < 0.65:
+        return "Intermediate"
+    else:
+        return "Advanced"
 
 
 def select_best_question(ability: float, questions: list, answered_ids: list) -> Optional[dict]:
-    """
-    From unanswered questions, pick the one whose difficulty
-    is closest to the student's current ability (target difficulty).
-    """
-    target = get_target_difficulty(ability)
+    # normalize answered_ids — strip whitespace, ensure plain strings
+    answered_set = {str(qid).strip() for qid in answered_ids}
 
-    unanswered = [q for q in questions if str(q["_id"]) not in answered_ids]
-
+    # filter out already answered questions
+    unanswered = [
+        q for q in questions
+        if str(q["_id"]).strip() not in answered_set
+    ]
     if not unanswered:
         return None
 
-    # Pick question with difficulty closest to target
+    # clamp target difficulty between 0.1 and 0.9
+    target = round(max(0.1, min(0.9, ability)), 2)
+
+    # pick question with difficulty closest to current ability
     best = min(unanswered, key=lambda q: abs(q["difficulty"] - target))
     return best

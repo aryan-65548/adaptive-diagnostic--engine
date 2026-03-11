@@ -2,7 +2,8 @@ from pymongo import MongoClient
 from app.config import settings
 
 questions = [
-    # ALGEBRA (5 questions)
+
+    # ── ALGEBRA (7 questions, difficulty 0.1 → 0.95) ──────────────────────────
     {
         "text": "Solve for x: 2x + 5 = 13",
         "options": ["A) 2", "B) 3", "C) 4", "D) 5"],
@@ -18,6 +19,14 @@ questions = [
         "difficulty": 0.3,
         "topic": "Algebra",
         "tags": ["functions", "quadratic"]
+    },
+    {
+        "text": "Simplify: (x² - 9) / (x - 3)",
+        "options": ["A) x - 3", "B) x + 3", "C) x² + 3", "D) x - 9"],
+        "correct_answer": "B",
+        "difficulty": 0.4,
+        "topic": "Algebra",
+        "tags": ["factoring", "simplification"]
     },
     {
         "text": "For what values of x is x² - 5x + 6 < 0?",
@@ -39,12 +48,20 @@ questions = [
         "text": "The sum of roots of 3x² - kx + 6 = 0 is 4. Find k.",
         "options": ["A) 6", "B) 8", "C) 10", "D) 12"],
         "correct_answer": "D",
-        "difficulty": 0.9,
+        "difficulty": 0.85,
         "topic": "Algebra",
         "tags": ["quadratic", "roots", "vieta"]
     },
+    {
+        "text": "If 2^(x+1) = 8^(x-1), find x.",
+        "options": ["A) 1", "B) 2", "C) 3", "D) 4"],
+        "correct_answer": "D",
+        "difficulty": 0.95,
+        "topic": "Algebra",
+        "tags": ["exponential equations", "advanced"]
+    },
 
-    # GEOMETRY (4 questions) 
+    # ── GEOMETRY (6 questions, difficulty 0.15 → 0.85) ────────────────────────
     {
         "text": "A circle has radius 7. What is its area? (use π ≈ 3.14)",
         "options": ["A) 43.96", "B) 49", "C) 153.86", "D) 154"],
@@ -62,6 +79,14 @@ questions = [
         "tags": ["triangles", "angles"]
     },
     {
+        "text": "A rectangle has perimeter 36 and length 10. What is its area?",
+        "options": ["A) 70", "B) 80", "C) 90", "D) 100"],
+        "correct_answer": "B",
+        "difficulty": 0.35,
+        "topic": "Geometry",
+        "tags": ["rectangle", "perimeter", "area"]
+    },
+    {
         "text": "A cylinder has radius 3 and height 10. What is its volume? (π ≈ 3.14)",
         "options": ["A) 188.4", "B) 282.6", "C) 314", "D) 94.2"],
         "correct_answer": "B",
@@ -77,8 +102,24 @@ questions = [
         "topic": "Geometry",
         "tags": ["similarity", "area ratio"]
     },
+    {
+        "text": "A cone has base radius 4 and slant height 5. What is its lateral surface area? (π ≈ 3.14)",
+        "options": ["A) 62.8", "B) 50.24", "C) 75.36", "D) 80"],
+        "correct_answer": "A",
+        "difficulty": 0.85,
+        "topic": "Geometry",
+        "tags": ["cone", "surface area", "3D"]
+    },
 
-    # VOCABULARY (5 questions) 
+    # ── VOCABULARY (7 questions, difficulty 0.1 → 0.9) ────────────────────────
+    {
+        "text": "Choose the word most similar in meaning to HAPPY:",
+        "options": ["A) Sad", "B) Joyful", "C) Angry", "D) Tired"],
+        "correct_answer": "B",
+        "difficulty": 0.1,
+        "topic": "Vocabulary",
+        "tags": ["synonyms", "basic"]
+    },
     {
         "text": "Choose the word most similar in meaning to BENEVOLENT:",
         "options": ["A) Hostile", "B) Charitable", "C) Indifferent", "D) Greedy"],
@@ -119,8 +160,16 @@ questions = [
         "topic": "Vocabulary",
         "tags": ["fill in the blank", "advanced GRE"]
     },
+    {
+        "text": "The scholar's _______ treatise was praised for dismantling decades of conventional wisdom with surgical precision.",
+        "options": ["A) tendentious", "B) perspicacious", "C) lachrymose", "D) nugatory"],
+        "correct_answer": "B",
+        "difficulty": 0.9,
+        "topic": "Vocabulary",
+        "tags": ["fill in the blank", "advanced GRE"]
+    },
 
-    # ARITHMETIC (3 questions)
+    # ── ARITHMETIC (5 questions, difficulty 0.1 → 0.75) ──────────────────────
     {
         "text": "What is 15% of 240?",
         "options": ["A) 24", "B) 36", "C) 48", "D) 30"],
@@ -145,8 +194,24 @@ questions = [
         "topic": "Arithmetic",
         "tags": ["percentage", "tricky"]
     },
+    {
+        "text": "A and B together can complete a job in 6 days. A alone takes 10 days. How long does B take alone?",
+        "options": ["A) 12 days", "B) 15 days", "C) 16 days", "D) 20 days"],
+        "correct_answer": "B",
+        "difficulty": 0.65,
+        "topic": "Arithmetic",
+        "tags": ["work", "rates"]
+    },
+    {
+        "text": "A shopkeeper marks a price 40% above cost price and gives a 25% discount. What is the profit percent?",
+        "options": ["A) 2%", "B) 5%", "C) 8%", "D) 15%"],
+        "correct_answer": "B",
+        "difficulty": 0.75,
+        "topic": "Arithmetic",
+        "tags": ["profit", "discount", "percentage"]
+    },
 
-    # DATA INTERPRETATION (3 questions)
+    # ── DATA INTERPRETATION (5 questions, difficulty 0.15 → 0.9) ─────────────
     {
         "text": "A dataset has values: 4, 7, 7, 9, 13. What is the mean?",
         "options": ["A) 7", "B) 8", "C) 9", "D) 10"],
@@ -154,6 +219,14 @@ questions = [
         "difficulty": 0.15,
         "topic": "Data Interpretation",
         "tags": ["mean", "statistics"]
+    },
+    {
+        "text": "What is the median of: 3, 7, 1, 9, 4, 6, 2?",
+        "options": ["A) 3", "B) 4", "C) 6", "D) 7"],
+        "correct_answer": "B",
+        "difficulty": 0.25,
+        "topic": "Data Interpretation",
+        "tags": ["median", "statistics"]
     },
     {
         "text": "In a set {3, 5, 7, 7, 9, 11}, what is the interquartile range (IQR)?",
@@ -171,6 +244,14 @@ questions = [
         "topic": "Data Interpretation",
         "tags": ["outliers", "box plot", "statistics"]
     },
+    {
+        "text": "A normal distribution has mean=50 and standard deviation=10. What percentage of data falls between 40 and 60?",
+        "options": ["A) 50%", "B) 68%", "C) 95%", "D) 99.7%"],
+        "correct_answer": "B",
+        "difficulty": 0.9,
+        "topic": "Data Interpretation",
+        "tags": ["normal distribution", "standard deviation", "statistics"]
+    },
 ]
 
 
@@ -179,13 +260,21 @@ def seed_questions():
     db = client[settings.db_name]
     collection = db["questions"]
 
-    # Avoid duplicate seeding
-    if collection.count_documents({}) >= 20:
-        print("Questions already seeded. Skipping.")
+    # Clear old questions and reseed fresh
+    existing = collection.count_documents({})
+    if existing >= 30:
+        print(f"Already have {existing} questions. Skipping seed.")
+        client.close()
         return
 
+    # If old 20-question seed exists, clear and reseed with 30
+    if existing > 0:
+        collection.delete_many({})
+        print(f"Cleared {existing} old questions. Reseeding with 30...")
+
     collection.insert_many(questions)
-    print(f"Seeded {len(questions)} questions into MongoDB.")
+    print(f"✅ Seeded {len(questions)} questions into MongoDB.")
+    print("Topics: Algebra (7), Geometry (6), Vocabulary (7), Arithmetic (5), Data Interpretation (5)")
     client.close()
 
 
