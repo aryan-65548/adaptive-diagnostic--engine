@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from app.config import settings
 
 questions = [
-    # --- ALGEBRA (5 questions) ---
+    # ALGEBRA (5 questions)
     {
         "text": "Solve for x: 2x + 5 = 13",
         "options": ["A) 2", "B) 3", "C) 4", "D) 5"],
@@ -44,7 +44,7 @@ questions = [
         "tags": ["quadratic", "roots", "vieta"]
     },
 
-    # --- GEOMETRY (4 questions) ---
+    # GEOMETRY (4 questions) 
     {
         "text": "A circle has radius 7. What is its area? (use π ≈ 3.14)",
         "options": ["A) 43.96", "B) 49", "C) 153.86", "D) 154"],
@@ -78,7 +78,7 @@ questions = [
         "tags": ["similarity", "area ratio"]
     },
 
-    # --- VOCABULARY (5 questions) ---
+    # VOCABULARY (5 questions) 
     {
         "text": "Choose the word most similar in meaning to BENEVOLENT:",
         "options": ["A) Hostile", "B) Charitable", "C) Indifferent", "D) Greedy"],
@@ -120,7 +120,7 @@ questions = [
         "tags": ["fill in the blank", "advanced GRE"]
     },
 
-    # --- ARITHMETIC (3 questions) ---
+    # ARITHMETIC (3 questions)
     {
         "text": "What is 15% of 240?",
         "options": ["A) 24", "B) 36", "C) 48", "D) 30"],
@@ -146,7 +146,7 @@ questions = [
         "tags": ["percentage", "tricky"]
     },
 
-    # --- DATA INTERPRETATION (3 questions) ---
+    # DATA INTERPRETATION (3 questions)
     {
         "text": "A dataset has values: 4, 7, 7, 9, 13. What is the mean?",
         "options": ["A) 7", "B) 8", "C) 9", "D) 10"],
@@ -181,11 +181,11 @@ def seed_questions():
 
     # Avoid duplicate seeding
     if collection.count_documents({}) >= 20:
-        print("✅ Questions already seeded. Skipping.")
+        print("Questions already seeded. Skipping.")
         return
 
     collection.insert_many(questions)
-    print(f"✅ Seeded {len(questions)} questions into MongoDB.")
+    print(f"Seeded {len(questions)} questions into MongoDB.")
     client.close()
 
 
