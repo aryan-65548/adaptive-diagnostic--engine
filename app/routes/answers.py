@@ -81,5 +81,5 @@ async def submit_answer(request: SubmitAnswerRequest):
         "ability_change": round(new_ability - old_ability, 4),
         "questions_answered": new_count,
         "is_complete": is_complete,
-        "message": "✅ Correct! Keep going!" if is_correct else "❌ Incorrect. You got this!"
+        "message": " Correct! Keep going!" if is_correct else " Incorrect. You got this!"
     }
