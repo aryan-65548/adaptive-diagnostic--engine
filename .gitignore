@@ -20,7 +20,7 @@ venv/
 env/
 ENV/
 
-# ── IDE / Editor ────────────────────────────────────────
+
 .vscode/
 .idea/
 *.swp
